@@ -60,44 +60,6 @@ public class CalculatorTest {
     }
   }
 
-  @Nested
-  @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-  class Test_for_set_operations{
 
-    @Test
-    void test_intersect_two_sets_with_values_receive_non_empty_set(){
-      Calculator calculator = new Calculator();
-      Integer[] firstSet = {2, 3, 4};
-      Integer[] secondSet = { 6, 3, 4, 10};
-      Integer[] actualSet = calculator.setIntersection(firstSet, secondSet);
-      assertThat(actualSet, arrayWithSize(2) );
-      assertThat(actualSet, arrayContainingInAnyOrder(3, 4));
-    }
-
-    @Test
-    void test_intersect_non_empty_with_empty_receive_empty_set(){
-      Calculator calculator = new Calculator();
-      Integer[] firstSet = {2, 3, 4};
-      Integer[] secondSet = { };
-      Integer[] actualSet = calculator.setIntersection(firstSet, secondSet);
-      assertThat(actualSet, arrayWithSize(0) );
-    }
-
-
-    @Test
-    void test_intersect_two_sets_with_values_receive_set_with_values(){
-      Calculator calculator = new Calculator();
-      Integer[] firstSet = {2, 3, 4};
-      Integer[] secondSet = { 6, 3, 4, 10};
-      Integer[] actualSet = calculator.setIntersection(firstSet, secondSet);
-      assertThat( actualSet,
-          allOf(
-              arrayWithSize(2),
-              arrayContainingInAnyOrder(3, 4)
-          )
-      );
-
-    }
-  }
 
 }
