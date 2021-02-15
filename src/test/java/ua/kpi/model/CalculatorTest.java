@@ -15,13 +15,14 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Tests for Calculator")
 public class CalculatorTest {
 
+
   @Nested
   @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
   class Tests_for_addition {
+    Calculator calculator = new Calculator();
 
     @Test
     void test_add_two_and_three_receive_five() {
-      Calculator calculator = new Calculator();
       int first = 2;
       int second = 3;
       final int expectedResult = 5;
@@ -33,7 +34,7 @@ public class CalculatorTest {
 
     @Test
     void test_add_two_and_three_get_last_result_five() {
-      Calculator calculator = new Calculator();
+
       int first = 2;
       int second = 3;
       final int expectedLastResult = 5;
@@ -48,9 +49,9 @@ public class CalculatorTest {
   @Nested
   @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
   class Tests_for_division {
+    Calculator calculator = new Calculator();
     @Test
     void test_divide_two_and_zero_raise_exception() {
-      Calculator calculator = new Calculator();
 
       int first = 2;
       int second = 0;

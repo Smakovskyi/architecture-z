@@ -16,10 +16,9 @@ public class SetCalculatorTest {
   @Nested
   @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
   class Test_for_set_operations{
-
+    SetCalculator calculator = new SetCalculator();
     @Test
     void test_intersect_two_sets_with_values_receive_non_empty_set(){
-      SetCalculator calculator = new SetCalculator();
       Integer[] firstSet = {2, 3, 4};
       Integer[] secondSet = { 6, 3, 4, 10};
       Integer[] actualSet = calculator.setIntersection(firstSet, secondSet);
@@ -29,10 +28,9 @@ public class SetCalculatorTest {
 
     @Test
     void test_intersect_non_empty_with_empty_receive_empty_set(){
-      SetCalculator calculator = new SetCalculator();
       Integer[] firstSet = {2, 3, 4};
-      Integer[] secondSet = { };
-      Integer[] actualSet = calculator.setIntersection(firstSet, secondSet);
+      Integer[] emptySet = { };
+      Integer[] actualSet = calculator.setIntersection(firstSet, emptySet);
       assertThat(actualSet, arrayWithSize(0) );
     }
 
