@@ -7,33 +7,40 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Setter;
 import ua.kpi.controller.commands.AddCommand;
 import ua.kpi.controller.commands.Command;
+import ua.kpi.controller.commands.CommandFactory;
 import ua.kpi.controller.commands.DefaultCommand;
 import ua.kpi.controller.commands.ExitCommand;
 import ua.kpi.controller.commands.SubCommand;
 import ua.kpi.view.View;
+import ua.kpi.view.Viewable;
 
 
 @Setter
+@AllArgsConstructor( access = AccessLevel.PRIVATE)
+@Builder
 public class Controller {
 
-  private View view;
+  private Viewable view;
 
   private InputStream in = System.in;
   private BufferedReader reader = new BufferedReader(
       new InputStreamReader(in));
 
+  private CommandFactory commandFactory = CommandFactory.getInstance();
   private Map<String, Command> commands = new HashMap<>();
-  {
-    commands.put("add", new AddCommand());
-    commands.put("exit", new ExitCommand());
-    commands.put("sub", new SubCommand());
-  }
 
-  public Controller(View view) {
+  public Controller(Viewable view) {
     this.view = view;
+    for(String commandName : commandFactory.getCommandNames() ){
+      commandFactory.createCommand(commandName)
+          .ifPresent( command -> commands.put(commandName, command) );
+    }
   }
 
   // add 2 3

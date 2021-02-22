@@ -45,4 +45,32 @@ class ControllerTest {
     verify(commands).getOrDefault(eq("add"),any());
     verify(view).print("5");
   }
+
+
+  @Test
+  void test_handle_user_input_for_add_5_5() throws Exception {
+    View view = mock(View.class);
+    BufferedReader bufferedReader = mock(BufferedReader.class);
+    when(bufferedReader.readLine()).thenReturn("add 5 5").thenReturn("exit");
+    InputStream in = mock(InputStream.class);
+    Command addCommand = mock(Command.class);
+    when(addCommand.execute(any())).thenReturn("10");
+
+    Map<String, Command> commands = mock(Map.class);
+    when(commands.getOrDefault(eq("add") , any())).thenReturn(addCommand);
+
+
+    Controller controller = Controller.builder()
+        .view(view)
+        .in(in)
+        .reader(bufferedReader)
+        .commands(commands)
+        .build();
+
+    controller.handleUserInput();
+
+    verify(bufferedReader, times(2)).readLine();
+    verify(commands).getOrDefault(eq("add"),any());
+    verify(view).print("10");
+  }
 }
